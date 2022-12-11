@@ -1,6 +1,8 @@
 import random
 import logging
 import argparse
+import tkinter as tk
+from tkinter import filedialog
 
 parser = argparse.ArgumentParser(prog="raffle", description="raffle -f <file location>")
 parser.add_argument("-f", "--file", help="file location")
@@ -16,7 +18,7 @@ else:
 if args.file:
     filename = args.file
 else:
-    filename = input("file location: ") #get file location
+    filename = selected_file = filedialog.askopenfilename()
     if filename == "":
         filename = "test.csv" #default to test.csv if no input
         logger.info(" using default file location: test.csv")
@@ -33,8 +35,10 @@ for i in range(len(keys)): #iterates once for every entry
     logger.debug(" "+str(keys[i])+" added to list "+str(values[i])+" times") #debugging
     for value in range((values[i])): #iterates once for every time the entry has skiied
         data.append(keys[i]) #adds to list
-print("\n") #newline for clean output
-print("result:",random.choice(data))
+result = str(random.choice(data)) #chooses random entry weighted by number of times skied
+logger.info("result: "+result) #displays result to cli
+tk.messagebox.showinfo("result", result) #displays result
+
 
     
 
