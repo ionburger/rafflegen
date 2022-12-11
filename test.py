@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import filedialog
+
 
 # Create the main window
 window = tk.Tk()
