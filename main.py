@@ -2,6 +2,7 @@ import random
 import logging
 import argparse
 import sys
+import sys
 import tkinter as tk
 from tkinter import filedialog
 
