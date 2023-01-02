@@ -1,6 +1,7 @@
 import random
 import logging
 import argparse
+import sys
 import tkinter as tk
 from tkinter import filedialog
 
@@ -18,16 +19,24 @@ else:
 if args.file:
     filename = args.file
 else:
-    filename = selected_file = filedialog.askopenfilename()
-    if filename == "":
-        filename = "test.csv" #default to test.csv if no input
-        logger.info(" using default file location: test.csv")
-
+    try:
+        filename = filedialog.askopenfilename()
+    except:
+        logger.info("cancelled, exiting")
+        sys.exit()
 csv = open(filename,"r").read() #open and read csv file
+#print(csv)
 data = []
+keys = []
+values = []
 
-keys = csv.splitlines()[0].split(",") #splitlines to seperate keys and values then split to seperate each str into its own list
-values = csv.splitlines()[1].split(",")
+
+split = csv.splitlines() #splitlines to seperate keys and values then split to seperate each str into its own list
+for i in range(len(split)):
+    keys.append(split[i].split(",")[0])
+    values.append(split[i].split(",")[1])
+
+
 keys = [int(x) for x in keys] #convert str lists to int lists
 values = [int(x) for x in values]
 
